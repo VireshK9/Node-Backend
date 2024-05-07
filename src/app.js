@@ -1,14 +1,26 @@
-require('dotenv').config()
-const express = require("express");
+import dotenv from "dotenv"
+import express, { json, urlencoded } from "express"
+import cors from "cors"
+import cookieParser from "cookie-parser";
 const app = express();
-const port = process.env.PORT || 3000;
 
-
-app.get("/",(req,res)=>{
-    res.send("Welcome to CCA Parbhani");
+dotenv.config({
+    path: './.env'
 })
 
+app.use(cors({
+    origin:process.env.CORS_ORIGIN,
+    credentials:true
+}))
+// json
+// urlencoded
+// static
 
-app.listen(port, ()=>{
-    console.log(`Server started at port ${port}`);
-})
+
+
+app.use(express.json({limit:"16kb"}))
+app.use(express.urlencoded({extended:true,limit:"16kb"}))
+app.use(express.static("public"))
+app.use(cookieParser())
+
+export default app;
