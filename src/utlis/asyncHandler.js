@@ -3,8 +3,6 @@ const asyncHandler = (requestFun)=>{(req,res,next)=>{
     .catch((err)=>{next(err)})
 }}
 
-
-
 export default asyncHandler
 
 
